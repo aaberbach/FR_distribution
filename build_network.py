@@ -1,34 +1,51 @@
 from bmtk.builder import NetworkBuilder
-import os, sys
 import numpy as np
-from bmtk.builder.auxi.node_params import positions_cuboid, positions_list
+import sys
 
-#np.random.seed(123412)
+if __name__ == '__main__':
+    if __file__ != sys.argv[-1]:
+        inp = sys.argv[-1]
+    else:
+        raise Exception("no work" + str(sys.argv[-1]))
+
+N = int(inp)
 
 # Initialize our network
 
-net = NetworkBuilder("SPWR_biophysical")
+net = NetworkBuilder("biophysical")
 
 def lognormal(m, s):
         mean = np.log(m) - 0.5 * np.log((s/m)**2+1)
         std = np.sqrt(np.log((s/m)**2 + 1))
         return np.random.lognormal(mean, std, 1)
 
-# num_inh = int(np.random.lognormal(43, 13, 1))
-# num_exc = int(np.random.lognormal(25, 10, 1))
-num_inh = int(lognormal(43, 13))
-num_exc = int(lognormal(25, 10))
+num_inh = [int(lognormal(43, 13)) for i in range(N)]
+print(num_inh)
+inh_bounds = []
+sum = 0
+for num in num_inh:
+        sum += num
+        inh_bounds.append(sum)
+
+num_exc = [int(lognormal(25, 10)) for i in range(N)]
+print(num_exc)
+exc_bounds = []
+sum = 0
+for num in num_exc:
+        sum += num
+        exc_bounds.append(sum)
+
 exc_fr = 2
 inh_fr = 10
 
 ##################################################################################
 ###################################Pyr Type C#####################################
 
-net.add_nodes(N=1, pop_name='PyrC',
-              mem_potential='e',
-              model_type='biophysical',
-              model_template='hoc:stylized_typeC',
-              morphology=None)
+net.add_nodes(N=N, pop_name='PyrC',
+        mem_potential='e',
+        model_type='biophysical',
+        model_template='hoc:stylized_typeC',
+        morphology=None)
 
 
 ##################################################################################
@@ -38,44 +55,62 @@ net.add_nodes(N=1, pop_name='PyrC',
 
 # External excitatory inputs
 exc_stim = NetworkBuilder('exc_stim')
-exc_stim.add_nodes(N=num_exc,
-                   pop_name='exc_stim',
-                   potential='exc',
-                   model_type='virtual')
+exc_stim.add_nodes(N=np.sum(num_exc),
+                pop_name='exc_stim',
+                potential='exc',
+                model_type='virtual')
 
 # External inhibitory inputs
 inh_stim = NetworkBuilder('inh_stim')
-inh_stim.add_nodes(N=num_inh,
-                   pop_name='inh_stim',
-                   potential='exc',
-                   model_type='virtual')
+inh_stim.add_nodes(N=np.sum(num_inh),
+                pop_name='inh_stim',
+                potential='exc',
+                model_type='virtual')
 
 ##################################################################################
 ###################################Edges##########################################
 
+def correct_cell(source, target, bounds):
+        sid = source.node_id
+        tid = target.node_id
+
+        lower_bound = 0
+        if tid > 0:
+                lower_bound = bounds[tid - 1]
+
+        upper_bound = bounds[tid]
+
+        if sid < upper_bound and sid >= lower_bound:
+                #print("connecting cell {} to {}".format(sid,tid))
+                return 1
+        else:
+                return None
+
 # Create connections between Inh --> Pyr cells
 net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
-              connection_rule=1,
-              syn_weight=5.0e-03,
-              weight_function='lognormal',
-              weight_sigma=1.0e-03,
-              dynamics_params='GABA_InhToExc.json',
-              model_template='Exp2Syn',
-              distance_range=[0.0, 300.0],
-              target_sections=['somatic'],
-              delay=2.0)
+        connection_rule=correct_cell,
+        connection_params={'bounds': inh_bounds},
+        syn_weight=5.0e-03,
+        weight_function='lognormal',
+        weight_sigma=1.0e-03,
+        dynamics_params='GABA_InhToExc.json',
+        model_template='Exp2Syn',
+        distance_range=[0.0, 300.0],
+        target_sections=['somatic'],
+        delay=2.0)
 
 # Create connections between Exc --> Pyr cells
 net.add_edges(source=exc_stim.nodes(), target=net.nodes(),
-                   connection_rule=1,
-                   syn_weight=12.0e-03,
-                   weight_function='gaussianBL',
-                   weight_sigma=1.0e-03,
-                   target_sections=['somatic'],
-                   delay=2.0,
-                   distance_range=[0.0, 300.0],
-                   dynamics_params='AMPA_ExcToExc.json',
-                   model_template='Exp2Syn')
+                connection_rule=correct_cell,
+                connection_params={'bounds': exc_bounds},
+                syn_weight=12.0e-03,
+                weight_function='gaussianBL',
+                weight_sigma=1.0e-03,
+                target_sections=['somatic'],
+                delay=2.0,
+                distance_range=[0.0, 300.0],
+                dynamics_params='AMPA_ExcToExc.json',
+                model_template='Exp2Syn')
 
 
 # Build and save our networks
@@ -93,13 +128,13 @@ inh_stim.save_nodes(output_dir='network')
 from bmtk.utils.reports.spike_trains import PoissonSpikeGenerator
 
 exc_psg = PoissonSpikeGenerator(population='exc_stim')
-exc_psg.add(node_ids=range(num_exc),  
+exc_psg.add(node_ids=range(np.sum(num_exc)),  
         firing_rate=int(exc_fr) / 1000,    
         times=(200.0, 1200.0))    
 exc_psg.to_sonata('exc_stim_spikes.h5')
 
 inh_psg = PoissonSpikeGenerator(population='inh_stim')
-inh_psg.add(node_ids=range(num_inh), 
+inh_psg.add(node_ids=range(np.sum(num_inh)), 
         firing_rate=int(inh_fr) / 1000,  
         times=(200.0, 1200.0))   
 inh_psg.to_sonata('inh_stim_spikes.h5')
@@ -108,9 +143,9 @@ inh_psg.to_sonata('inh_stim_spikes.h5')
 from bmtk.utils.sim_setup import build_env_bionet
 
 build_env_bionet(base_dir='./',
-		network_dir='./network',
-		tstop=1200.0, dt = 0.1,
-		report_vars=['v'],
-        spikes_inputs=[('exc_stim', 'exc_stim_spikes.h5'), ('inh_stim', 'inh_stim_spikes.h5')],
-		components_dir='biophys_components',
-		compile_mechanisms=True)
+                network_dir='./network',
+                tstop=1200.0, dt = 0.1,
+                report_vars=['v'],
+                spikes_inputs=[('exc_stim', 'exc_stim_spikes.h5'), ('inh_stim', 'inh_stim_spikes.h5')],
+                components_dir='biophys_components',
+                compile_mechanisms=True)
