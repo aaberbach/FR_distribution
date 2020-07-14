@@ -76,8 +76,14 @@ for key in local_gids:
 
 try:
     f = h5py.File(raster_file,'r')
-    timestamps = f['spikes']['inh_stim']['timestamps'].value
-    gids = f['spikes']['inh_stim']['node_ids'].value
+    
+    spike_keys = list(f['spikes'].keys())
+    if len(spike_keys) > 1:
+        raise Exception("Spike keys: " + str(spike_keys))
+
+    spike_key = list(f['spikes'].keys())[0]
+    timestamps = f['spikes'][spike_key]['timestamps'].value
+    gids = f['spikes'][spike_key]['node_ids'].value
 
     for i in range(len(gids)):
         if gids[i] in local_gids and timestamps[i] >= 200:
