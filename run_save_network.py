@@ -1,10 +1,15 @@
-import sys
+import sys, os
 from bmtk.simulator import bionet
 import numpy as np
 import pandas as pd
 import h5py
+from neuron import h
 
 from bmtk.simulator.bionet.pyfunction_cache import add_weight_function
+
+pc = h.ParallelContext()  # object to access MPI methods
+MPI_size = int(pc.nhost())
+MPI_rank = int(pc.id())
 
 if __name__ == '__main__':
     if __file__ != sys.argv[-1]:
@@ -59,15 +64,14 @@ for gid, cell in cells.items():
     inh_strengths[gid] = inh_strens
 
 sim.run()
-
-import pdb; pdb.set_trace()
+pc.barrier()
 
 raster_file = './output/spikes.h5'
 
 frs = {}
-all_gids = [i for i in range(len(exc_strengths))]
+local_gids = list(exc_strengths.keys())
 
-for key in all_gids:
+for key in local_gids:
     frs[key] = 0
 
 try:
@@ -76,14 +80,25 @@ try:
     gids = f['spikes']['inh_stim']['node_ids'].value
 
     for i in range(len(gids)):
-        if timestamps[i] >= 200:
+        if gids[i] in local_gids and timestamps[i] >= 200:
             frs[gids[i]] += 1
 except:
     print("No spikes.")
 
 df = pd.DataFrame()
-dicts = [{"FR": frs[gid], "num_exc": len(exc_strengths[gid]), "num_inh": len(inh_strengths[gid]),
+dicts = [{"gid": gid, "FR": frs[gid], "num_exc": len(exc_strengths[gid]), "num_inh": len(inh_strengths[gid]),
             "avg_exc": np.mean(exc_strengths[gid]), "avg_inh": np.mean(inh_strengths[gid]), 
-            "max_exc": np.max(exc_strengths[gid]), "max_inh": np.max(inh_strengths[gid])} for gid in all_gids]
+            "max_exc": np.max(exc_strengths[gid]), "max_inh": np.max(inh_strengths[gid])} for gid in local_gids]
 df = pd.DataFrame(dicts)
-df.to_csv(fname, index=False)
+#df.set_index("gid")
+df.to_csv(fname+str(MPI_rank)+'.csv', index=False)
+
+#import pdb; pdb.set_trace()
+
+pc.barrier()
+
+if MPI_rank == 0:
+    base_df = pd.read_csv(fname+"0.csv", index_col="gid")
+    res_df = pd.concat([base_df] + [pd.read_csv(fname+str(rank)+".csv", index_col="gid") for rank in range(1, MPI_size)])
+    [os.remove(fname+str(rank)+".csv") for rank in range(MPI_size)]
+    res_df.to_csv(fname+".csv")
