@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import h5py
 from neuron import h
+from scipy.stats import skew
 
 from bmtk.simulator.bionet.pyfunction_cache import add_weight_function
 
