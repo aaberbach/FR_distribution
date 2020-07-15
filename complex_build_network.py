@@ -19,7 +19,7 @@ def lognormal(m, s):
         std = np.sqrt(np.log((s/m)**2 + 1))
         return np.random.lognormal(mean, std, 1)
 
-num_inh = [int(lognormal(43, 13)) for i in range(N)]
+num_inh = [int(lognormal(50, 13)) for i in range(N)]
 print(num_inh)
 inh_bounds = []
 sum = 0
@@ -27,7 +27,7 @@ for num in num_inh:
         sum += num
         inh_bounds.append(sum)
 
-num_exc = [int(lognormal(25, 10)) for i in range(N)]
+num_exc = [int(lognormal(35, 10)) for i in range(N)]
 print(num_exc)
 exc_bounds = []
 sum = 0
@@ -92,10 +92,10 @@ def correct_cell(source, target, bounds):
 net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
         connection_rule=correct_cell,
         connection_params={'bounds': inh_bounds},
-        syn_weight=5.0e-03,
+        syn_weight=10.0e-03,
         weight_function='lognormal',
         weight_sigma=1.0e-03,
-        weight_max=20e-03,
+        weight_max=40e-03,
         dynamics_params='GABA_InhToExc.json',
         model_template='Exp2Syn',
         distance_range=[0.0, 300.0],
@@ -106,10 +106,10 @@ net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
 net.add_edges(source=exc_stim.nodes(), target=net.nodes(),
                 connection_rule=correct_cell,
                 connection_params={'bounds': exc_bounds},
-                syn_weight=5.0e-03,
+                syn_weight=10.0e-03,
                 weight_function='gaussianBL',
                 weight_sigma=1.0e-03,
-                weight_max=10e-03,
+                weight_max=30e-03,
                 target_sections=['somatic'],
                 delay=2.0,
                 distance_range=[0.0, 300.0],
