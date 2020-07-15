@@ -24,14 +24,23 @@ config_file = 'simulation_config.json'
 def gaussianBL(edge_props, source, target):
     w0 = edge_props["syn_weight"]
     sigma = edge_props["weight_sigma"]
-    return np.random.normal(w0, sigma, 1)
+    try:
+        maximum = edge_props["weight_max"]
+        return min(maximum, np.random.normal(w0, sigma, 1))
+    except:
+        return np.random.normal(w0, sigma, 1)
 
 def lognormal(edge_props, source, target):
     m = edge_props["syn_weight"]
     s = edge_props["weight_sigma"]
     mean = np.log(m) - 0.5 * np.log((s/m)**2+1)
     std = np.sqrt(np.log((s/m)**2 + 1))
-    return np.random.lognormal(mean, std, 1)
+
+    try:
+        maximum = edge_props["weight_max"]
+        return min(maximum, np.random.lognormal(mean, std, 1))
+    except:
+        return np.random.lognormal(mean, std, 1)
 
 add_weight_function(lognormal)
 add_weight_function(gaussianBL)
