@@ -103,7 +103,9 @@ except:
 df = pd.DataFrame()
 dicts = [{"gid": gid, "FR": frs[gid], "num_exc": len(exc_strengths[gid]), "num_inh": len(inh_strengths[gid]),
             "avg_exc": np.mean(exc_strengths[gid]), "avg_inh": np.mean(inh_strengths[gid]), 
-            "max_exc": np.max(exc_strengths[gid]), "max_inh": np.max(inh_strengths[gid])} for gid in local_gids]
+            "max_exc": np.max(exc_strengths[gid]), "max_inh": np.max(inh_strengths[gid]),
+            "std_exc": np.std(exc_strengths[gid]), "std_inh": np.std(inh_strengths[gid]),
+            "skew_exc": skew(exc_strengths[gid]), "skew_inh": skew(inh_strengths[gid])} for gid in local_gids]
 df = pd.DataFrame(dicts)
 #df.set_index("gid")
 df.to_csv(fname+str(MPI_rank)+'.csv', index=False)
