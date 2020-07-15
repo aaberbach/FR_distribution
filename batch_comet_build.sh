@@ -3,9 +3,9 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH -A TG-DBS180005
-#SBATCH --job-name=small_build
-#SBATCH --output=small_build.out
-#SBATCH --time 0-00:05
+#SBATCH --job-name=all_log_build
+#SBATCH --output=all_log_build.out
+#SBATCH --time 0-00:03
 
 
 module purge
@@ -22,6 +22,6 @@ rm -rf network/*
 
 echo "Building model at $(date)"
 
-python build_network.py 10
+python build_network.py 1000
 
 echo "Done building model at $(date)"
