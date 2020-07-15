@@ -10,7 +10,7 @@ df = pd.read_csv("all_log_results.csv", index_col='gid')
 df.shape
 print(df.describe())
 
-x_cols = ["avg_exc", "avg_inh", "max_exc", "max_inh", "num_exc", "num_inh"]
+x_cols = ["avg_exc", "avg_inh", "max_exc", "max_inh", "num_exc", "num_inh", "std_exc", "std_inh", "skew_exc", "skew_inh"]
 
 X = df[x_cols].values
 y = df['FR'].values
