@@ -1,16 +1,27 @@
 import pandas as pd  
 import numpy as np  
+import sys
 import matplotlib.pyplot as plt  
 import seaborn as sb 
 from sklearn.model_selection import train_test_split 
 from sklearn.linear_model import LinearRegression
 from sklearn import metrics
 
-df = pd.read_csv("all_log_results.csv", index_col='gid')
+if __name__ == '__main__':
+    if __file__ != sys.argv[-1]:
+        inp = sys.argv[-1]
+    else:
+        raise Exception("no work" + str(sys.argv[-1]))
+
+fname = str(inp)
+
+#df = pd.read_csv("all_log_results.csv", index_col='gid')
+#df = pd.read_csv("all_log_dend_results.csv", index_col='gid')
+df = pd.read_csv(fname, index_col='gid')
 df.shape
 print(df.describe())
 
-x_cols = ["avg_exc", "avg_inh", "max_exc", "max_inh", "num_exc", "num_inh", "std_exc", "std_inh", "skew_exc", "skew_inh"]
+x_cols = ["avg_exc", "avg_inh", "max_exc", "max_inh", "num_exc", "num_inh", ]#"std_exc", "std_inh", "skew_exc", "skew_inh"]
 
 X = df[x_cols].values
 y = df['FR'].values
@@ -24,7 +35,13 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 regressor = LinearRegression()
 regressor.fit(X_train, y_train)
 
-coeff_df = pd.DataFrame(regressor.coef_, x_cols, columns=['Coefficient'])
+coefs = regressor.coef_
+weighted_coefs = coefs.copy()
+for i in range(len(coefs)):
+    weighted_coefs[i] *= np.std(np.abs(df[x_cols[i]]))
+
+#coeff_df = pd.DataFrame({"Coefs":regressor.coef_, "W_coefs": weighted_coefs}, x_cols)
+coeff_df = pd.DataFrame(regressor.coef_, x_cols, columns=['Coefficients'])
 print(coeff_df)
 
 y_pred = regressor.predict(X_test)
