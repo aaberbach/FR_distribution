@@ -21,7 +21,7 @@ net = NetworkBuilder("biophysical")
 def lognormal(m, s):
         mean = np.log(m) - 0.5 * np.log((s/m)**2+1)
         std = np.sqrt(np.log((s/m)**2 + 1))
-        return np.random.lognormal(mean, std, 1)
+        return np.maximum(np.random.lognormal(mean, std, 1), 0)
 
 num_inh = [int(lognormal(43, 13)) for i in range(N)]
 print(num_inh)
