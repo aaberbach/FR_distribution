@@ -41,9 +41,9 @@ def lognormal(edge_props, source, target):
 
     try:
         maximum = edge_props["weight_max"]
-        return min(maximum, np.random.lognormal(mean, std, 1))
+        return max(min(maximum, np.random.lognormal(mean, std, 1)), 0)
     except:
-        return np.random.lognormal(mean, std, 1)
+        return max(0, np.random.lognormal(mean, std, 1))
 
 add_weight_function(lognormal)
 add_weight_function(gaussianBL)
