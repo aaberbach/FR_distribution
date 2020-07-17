@@ -90,19 +90,19 @@ def correct_cell(source, target, bounds):
         else:
                 return None
 
-# Create connections between Inh --> Pyr cells
-#net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
-#        connection_rule=correct_cell,
-#        connection_params={'bounds': inh_bounds},
-#        syn_weight=5.0e-03,
-#        weight_function='lognormal',
-#        weight_sigma=1.0e-03,
-#        weight_max=20e-03,
-#        dynamics_params='GABA_InhToExc.json',
-#        model_template='Exp2Syn',
-#        distance_range=[0.0, 300.0],
-#        target_sections=['somatic'],
-#        delay=2.0)
+Create connections between Inh --> Pyr cells
+net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
+       connection_rule=correct_cell,
+       connection_params={'bounds': inh_bounds},
+       syn_weight=5.0e-03,
+       weight_function='lognormal',
+       weight_sigma=1.0e-03,
+       weight_max=20e-03,
+       dynamics_params='GABA_InhToExc.json',
+       model_template='Exp2Syn',
+       distance_range=[0.0, 300.0],
+       target_sections=['somatic'],
+       delay=2.0)
 
 # Create connections between Exc --> Pyr cells
 net.add_edges(source=exc_stim.nodes(), target=net.nodes(),
