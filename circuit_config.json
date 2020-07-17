@@ -37,6 +37,7 @@
         "edge_types_file": "$NETWORK_DIR/inh_stim_biophysical_edge_types.csv",
         "edges_file": "$NETWORK_DIR/inh_stim_biophysical_edges.h5"
       }
-    ]
+    ],
+    "gap_juncs": []
   }
 }

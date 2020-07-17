@@ -5,8 +5,10 @@ import pandas as pd
 import h5py
 from neuron import h
 from scipy.stats import skew
-
+import synapses
 from bmtk.simulator.bionet.pyfunction_cache import add_weight_function
+
+synapses.load()
 
 pc = h.ParallelContext()  # object to access MPI methods
 MPI_size = int(pc.nhost())
