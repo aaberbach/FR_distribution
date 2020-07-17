@@ -90,7 +90,7 @@ def correct_cell(source, target, bounds):
         else:
                 return None
 
-Create connections between Inh --> Pyr cells
+#Create connections between Inh --> Pyr cells
 net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
        connection_rule=correct_cell,
        connection_params={'bounds': inh_bounds},
