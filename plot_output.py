@@ -5,6 +5,7 @@ from bmtk.analyzer.cell_vars import _get_cell_report, plot_report
 import matplotlib.pyplot as plt
 import pandas as pd 
 from scipy.signal import find_peaks
+import pdb
 
 # Load data
 config_file = "simulation_config.json"
@@ -15,7 +16,14 @@ mem_pot_file = './output/v_report.h5'
 
 # load 
 f = h5py.File(mem_pot_file,'r')
-mem_potential = f['report']['stim']['data']
+mem_potential = f['report']['inh_stim']['data']
+plt.plot(mem_potential[:,0]+70)
+
+f = h5py.File('exc_stim_spikes.h5','r')
+input_spikes = f['spikes']['exc_stim']['timestamps'][:]
+plt.plot(input_spikes*10,f['spikes']['exc_stim']['node_ids'][:],'r.')
+plt.show()
+pdb.set_trace()
 
 #df = pd.DataFrame.from_csv("PN_C.csv")
 

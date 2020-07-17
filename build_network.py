@@ -1,6 +1,10 @@
 from bmtk.builder import NetworkBuilder
 import numpy as np
 import sys
+import synapses
+
+synapses.load()
+syn = synapses.syn_params_dicts()
 
 if __name__ == '__main__':
     if __file__ != sys.argv[-1]:
@@ -87,32 +91,32 @@ def correct_cell(source, target, bounds):
                 return None
 
 # Create connections between Inh --> Pyr cells
-net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
-        connection_rule=correct_cell,
-        connection_params={'bounds': inh_bounds},
-        syn_weight=5.0e-03,
-        weight_function='lognormal',
-        weight_sigma=1.0e-03,
-        weight_max=20e-03,
-        dynamics_params='GABA_InhToExc.json',
-        model_template='Exp2Syn',
-        distance_range=[0.0, 300.0],
-        target_sections=['somatic'],
-        delay=2.0)
+#net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
+#        connection_rule=correct_cell,
+#        connection_params={'bounds': inh_bounds},
+#        syn_weight=5.0e-03,
+#        weight_function='lognormal',
+#        weight_sigma=1.0e-03,
+#        weight_max=20e-03,
+#        dynamics_params='GABA_InhToExc.json',
+#        model_template='Exp2Syn',
+#        distance_range=[0.0, 300.0],
+#        target_sections=['somatic'],
+#        delay=2.0)
 
 # Create connections between Exc --> Pyr cells
 net.add_edges(source=exc_stim.nodes(), target=net.nodes(),
                 connection_rule=correct_cell,
                 connection_params={'bounds': exc_bounds},
-                syn_weight=5.0e-03,
+                syn_weight=10.0e-03,
                 weight_function='gaussianBL',
                 weight_sigma=1.0e-03,
                 weight_max=10e-03,
                 target_sections=['dend'],
                 delay=2.0,
                 distance_range=[0.0, 300.0],
-                dynamics_params='AMPA_ExcToExc.json',
-                model_template='Exp2Syn')
+                dynamics_params='PN2PN.json',
+                model_template=syn['PN2PN.json']['level_of_detail'])
 
 
 # Build and save our networks
@@ -128,6 +132,7 @@ inh_stim.save_nodes(output_dir='network')
 
 
 from bmtk.utils.reports.spike_trains import PoissonSpikeGenerator
+from bmtk.utils.reports.spike_trains.spikes_file_writers import write_csv
 
 exc_psg = PoissonSpikeGenerator(population='exc_stim')
 exc_psg.add(node_ids=range(np.sum(num_exc)),  
