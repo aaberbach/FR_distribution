@@ -3,8 +3,8 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
 #SBATCH -A TG-DBS180005
-#SBATCH --job-name=all_log_build
-#SBATCH --output=all_log_build.out
+#SBATCH --job-name=build
+#SBATCH --output=build.out
 #SBATCH --time 0-00:03
 
 

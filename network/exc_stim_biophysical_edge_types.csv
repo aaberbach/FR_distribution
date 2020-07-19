@@ -1,2 +1,2 @@
-edge_type_id target_query source_query model_template weight_function delay distance_range target_sections weight_sigma dynamics_params syn_weight
-101 * * Exp2Syn gaussianBL 2.0 "[0.0, 300.0]" ['somatic'] 0.001 AMPA_ExcToExc.json 0.012
+edge_type_id target_query source_query syn_weight distance_range dynamics_params model_template target_sections delay
+101 * * 1 "[0.0, 300.0]" PN2PN.json pyr2pyr ['dend'] 2.0
