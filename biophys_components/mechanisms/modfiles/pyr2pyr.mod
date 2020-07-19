@@ -203,9 +203,6 @@ DERIVATIVE release {
  		W_ampa = Wmin
 	}
 	
-	W_ampa = 1
-	W_nmda = 1
-	
 	g_nmda = gbar_nmda*r_nmda * facfactor
 	i_nmda = W_nmda*g_nmda*(v - Erev_nmda)*sfunc(v)
 
