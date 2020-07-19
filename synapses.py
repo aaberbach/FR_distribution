@@ -5,7 +5,13 @@ import os
 from bmtk.simulator.bionet.pyfunction_cache import add_synapse_model
 from neuron import h
 import random
+import numpy as np
 
+def lognormal(m, s):
+        mean = np.log(m) - 0.5 * np.log((s/m)**2+1)
+        std = np.sqrt(np.log((s/m)**2 + 1))
+        return max(np.random.lognormal(mean, std, 1), 0.0000000001)
+    
 def Bg2Pyr(syn_params, sec_x, sec_id):
     """Create a bg2pyr synapse
     :param syn_params: parameters of a synapse
@@ -252,8 +258,9 @@ def Pyr2Pyr(syn_params, sec_x, sec_id):
         lsyn.Erev_nmda = float(syn_params['Erev_nmda']) # par.x(16)
     
     if syn_params.get('initW'):
-        lsyn.initW = float(syn_params['initW']) * random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
-
+        #lsyn.initW = float(syn_params['initW']) * random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
+        lsyn.initW = float(lognormal(0.1344, 0.10257))
+        
     if syn_params.get('Wmax'):
         lsyn.Wmax = float(syn_params['Wmax']) * lsyn.initW # par.x(1) * lsyn.initW
     if syn_params.get('Wmin'):
