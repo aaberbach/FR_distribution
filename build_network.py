@@ -46,10 +46,12 @@ inh_fr = 10
 ###################################Pyr Type C#####################################
 
 net.add_nodes(N=N, pop_name='PyrC',
-        mem_potential='e',
-        model_type='biophysical',
-        model_template='hoc:stylized_typeC',
-        morphology=None)
+              potental='exc',
+              model_type='biophysical',
+              model_template='ctdb:Biophys1.hoc',
+              model_processing='aibs_perisomatic',
+              dynamics_params='472363762_fit.json',
+              morphology='Scnn1a_473845048_m.swc')
 
 
 ##################################################################################
@@ -94,10 +96,10 @@ def correct_cell(source, target, bounds):
 net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
        connection_rule=correct_cell,
        connection_params={'bounds': inh_bounds},
-       syn_weight=5.0e-03,
+       syn_weight=0.1,
        weight_function='lognormal',
-       weight_sigma=3.0e-03,
-       weight_max=20e-03,
+       weight_sigma=0.05,
+       weight_max=1,
        dynamics_params='GABA_InhToExc.json',
        model_template='Exp2Syn',
        distance_range=[0.0, 300.0],
@@ -108,10 +110,7 @@ net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
 net.add_edges(source=exc_stim.nodes(), target=net.nodes(),
                 connection_rule=correct_cell,
                 connection_params={'bounds': exc_bounds},
-                syn_weight=10.0e-03,
-                weight_function='lognormal',
-                weight_sigma=3.0e-03,
-                weight_max=50e-03,
+                syn_weight=1,
                 target_sections=['dend'],
                 delay=2.0,
                 distance_range=[0.0, 300.0],
