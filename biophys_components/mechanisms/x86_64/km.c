@@ -244,7 +244,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
   hoc_register_dparam_semantics(_mechtype, 2, "k_ion");
  	hoc_register_cvode(_mechtype, _ode_count, 0, 0, 0);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 km /home/mizzou/Internship/FI_Plot/Pyramidal/biophys_components/mechanisms/x86_64/km.mod\n");
+ 	ivoc_help("help ?1 km /home/mizzou/Internship/paperFR/FR_distribution/biophys_components/mechanisms/x86_64/km.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -526,7 +526,7 @@ _first = 0;
 }
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Internship/FI_Plot/Pyramidal/biophys_components/mechanisms/modfiles/km.mod";
+static const char* nmodl_filename = "/home/mizzou/Internship/paperFR/FR_distribution/biophys_components/mechanisms/modfiles/km.mod";
 static const char* nmodl_file_text = 
   "\n"
   "COMMENT\n"

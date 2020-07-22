@@ -177,7 +177,8 @@ def Int2Pyr(syn_params, sec_x, sec_id):
         lsyn.Erev_nmda = float(syn_params['Erev_nmda']) # par.x(16)
     
     if syn_params.get('initW'):
-        lsyn.initW = float(syn_params['initW']) * random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
+        #lsyn.initW = float(syn_params['initW']) * random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
+        lsyn.initW = float(lognormal(3.180, 0.517))
 
     if syn_params.get('Wmax'):
         lsyn.Wmax = float(syn_params['Wmax']) * lsyn.initW # par.x(1) * lsyn.initW
