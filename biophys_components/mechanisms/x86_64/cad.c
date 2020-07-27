@@ -221,7 +221,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_synonym(_mechtype, _ode_synonym);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 cad /home/mizzou/Internship/FI_Plot/Pyramidal/biophys_components/mechanisms/x86_64/cad.mod\n");
+ 	ivoc_help("help ?1 cad /home/mizzou/Internship/NewCell/MakeSynapses/FR_distribution/biophys_components/mechanisms/x86_64/cad.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -509,7 +509,7 @@ _first = 0;
 #endif
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Internship/FI_Plot/Pyramidal/biophys_components/mechanisms/modfiles/cad.mod";
+static const char* nmodl_filename = "/home/mizzou/Internship/NewCell/MakeSynapses/FR_distribution/biophys_components/mechanisms/modfiles/cad.mod";
 static const char* nmodl_file_text = 
   "TITLE decay of internal calcium concentration\n"
   ":\n"

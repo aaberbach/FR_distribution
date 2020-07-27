@@ -1,13 +1,20 @@
-2020-07-19 08:47:07,432 [INFO] Created log file
-2020-07-19 08:47:07,441 [INFO] Running NEURON with mpi (20 cores).
-2020-07-19 08:47:08,545 [INFO] Building cells.
-2020-07-19 08:47:11,787 [INFO] Building recurrent connections
-2020-07-19 08:47:11,787 [INFO] Building virtual cell stimulations for exc_stim_spikes
-2020-07-19 08:47:21,423 [INFO] Building virtual cell stimulations for inh_stim_spikes
-2020-07-19 08:49:02,317 [INFO] Running simulation for 1200.000 ms with the time step 0.100 ms
-2020-07-19 08:49:02,318 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
-2020-07-19 08:49:02,318 [INFO] Block save every 5000 steps
-2020-07-19 08:49:09,693 [INFO]     step:5000 t_sim:500.00 ms
-2020-07-19 08:49:17,084 [INFO]     step:10000 t_sim:1000.00 ms
-2020-07-19 08:49:20,029 [INFO]     step:12000 t_sim:1200.00 ms
-2020-07-19 08:49:22,923 [INFO] Simulation completed in 25.4 seconds 
+2020-07-27 10:09:48,014 [INFO] Created log file
+2020-07-27 10:09:48,479 [INFO] Building cells.
+2020-07-27 10:09:49,107 [INFO] Building recurrent connections
+2020-07-27 10:09:49,108 [INFO] Building virtual cell stimulations for exc_stim_spikes
+2020-07-27 10:09:55,039 [INFO] Building virtual cell stimulations for inh_stim_spikes
+2020-07-27 10:09:56,788 [INFO] Running simulation for 5200.000 ms with the time step 0.100 ms
+2020-07-27 10:09:56,789 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-07-27 10:09:56,789 [INFO] Block save every 5000 steps
+2020-07-27 10:10:08,342 [INFO]     step:5000 t_sim:500.00 ms
+2020-07-27 10:10:20,148 [INFO]     step:10000 t_sim:1000.00 ms
+2020-07-27 10:10:31,915 [INFO]     step:15000 t_sim:1500.00 ms
+2020-07-27 10:10:43,883 [INFO]     step:20000 t_sim:2000.00 ms
+2020-07-27 10:10:55,821 [INFO]     step:25000 t_sim:2500.00 ms
+2020-07-27 10:11:08,350 [INFO]     step:30000 t_sim:3000.00 ms
+2020-07-27 10:11:20,946 [INFO]     step:35000 t_sim:3500.00 ms
+2020-07-27 10:11:32,618 [INFO]     step:40000 t_sim:4000.00 ms
+2020-07-27 10:11:44,449 [INFO]     step:45000 t_sim:4500.00 ms
+2020-07-27 10:11:55,908 [INFO]     step:50000 t_sim:5000.00 ms
+2020-07-27 10:12:00,448 [INFO]     step:52000 t_sim:5200.00 ms
+2020-07-27 10:12:00,465 [INFO] Simulation completed in 2.0 minutes, 3.677 seconds 

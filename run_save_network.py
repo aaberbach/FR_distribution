@@ -65,9 +65,11 @@ for gid, cell in cells.items():
     inh_strens = []
     for con in cell._connections:
         if con._edge_prop.source_population == 'exc_stim':
-            exc_strens.append(con.syn_weight)
+            #exc_strens.append(con.syn_weight)
+            exc_strens.append(con._syn.initW)
         elif con._edge_prop.source_population == 'inh_stim':
-            inh_strens.append(con.syn_weight)
+            #inh_strens.append(con.syn_weight)
+            inh_strens.append(con._syn.initW)
         else:
             raise Exception("Source pop is: " + str(con._edge_prop.source_population))
 
@@ -104,7 +106,7 @@ except:
     print("No spikes.")
 
 df = pd.DataFrame()
-dicts = [{"gid": gid, "FR": frs[gid], "num_exc": len(exc_strengths[gid]), "num_inh": len(inh_strengths[gid]),
+dicts = [{"gid": gid, "FR": frs[gid] / 5, "num_exc": len(exc_strengths[gid]), "num_inh": len(inh_strengths[gid]),
             "avg_exc": np.mean(exc_strengths[gid]), "avg_inh": np.mean(inh_strengths[gid]), 
             "max_exc": np.max(exc_strengths[gid]), "max_inh": np.max(inh_strengths[gid]),
             "std_exc": np.std(exc_strengths[gid]), "std_inh": np.std(inh_strengths[gid]),

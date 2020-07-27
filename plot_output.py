@@ -19,11 +19,11 @@ f = h5py.File(mem_pot_file,'r')
 mem_potential = f['report']['inh_stim']['data']
 plt.plot(mem_potential[:,0]+70)
 
-f = h5py.File('exc_stim_spikes.h5','r')
-input_spikes = f['spikes']['exc_stim']['timestamps'][:]
-plt.plot(input_spikes*10,f['spikes']['exc_stim']['node_ids'][:],'r.')
-plt.show()
-pdb.set_trace()
+# f = h5py.File('exc_stim_spikes.h5','r')
+# input_spikes = f['spikes']['exc_stim']['timestamps'][:]
+# plt.plot(input_spikes*10,f['spikes']['exc_stim']['node_ids'][:],'r.')
+# plt.show()
+#pdb.set_trace()
 
 #df = pd.DataFrame.from_csv("PN_C.csv")
 
@@ -42,20 +42,20 @@ plt.figure()
 plt.plot(mem_potential[:,0])
 
 
-mem = np.array(mem_potential[:, 0])
-base = mem[5000]
-mem = mem[10000:]
-plt.figure()
-plt.plot(mem)
-subed = mem - base
-plt.figure()
-plt.plot(subed)
+# mem = np.array(mem_potential[:, 0])
+# base = mem[5000]
+# mem = mem[10000:]
+# plt.figure()
+# plt.plot(mem)
+# subed = mem - base
+# plt.figure()
+# plt.plot(subed)
 
 # print(np.min(mem[5000:]))
 # print(np.min(mem[5000:6000]))
 # print(mem[5000])
 
-print(np.trapz(subed, dx=1))
+# print(np.trapz(subed, dx=1))
 
 
 plt.show()

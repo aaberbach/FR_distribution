@@ -1,2 +1,2 @@
-edge_type_id target_query source_query weight_sigma weight_max syn_weight weight_function distance_range dynamics_params model_template target_sections delay
-100 * * 0.05 1 0.1 lognormal "[0.0, 300.0]" GABA_InhToExc.json Exp2Syn ['somatic'] 2.0
+edge_type_id target_query source_query syn_weight delay target_sections model_template dynamics_params distance_range
+100 * * 1 0.1 ['somatic'] int2pyr INT2PN.json "[0.0, 300.0]"

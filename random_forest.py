@@ -36,9 +36,14 @@ vals = np.array(y).astype("int")
 # plt.hist(np.log(np.array(y) + 1))
 # plt.show()
 
-# plt.figure()
-# sb.distplot(df['FR'])
-# plt.show()
+plt.figure()
+sb.distplot(df['FR'])
+plt.show()
+
+plt.figure()
+sb.distplot(df['FR'])
+plt.xscale('log')
+plt.show()
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1)
 

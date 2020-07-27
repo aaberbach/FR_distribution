@@ -249,7 +249,7 @@ extern void _cvode_abstol( Symbol**, double*, int);
  	hoc_register_cvode(_mechtype, _ode_count, _ode_map, _ode_spec, _ode_matsol);
  	hoc_register_tolerance(_mechtype, _hoc_state_tol, &_atollist);
  	hoc_register_var(hoc_scdoub, hoc_vdoub, hoc_intfunc);
- 	ivoc_help("help ?1 cav31 /home/mizzou/Internship/FI_Plot/Pyramidal/biophys_components/mechanisms/x86_64/cav31.mod\n");
+ 	ivoc_help("help ?1 cav31 /home/mizzou/Internship/NewCell/MakeSynapses/FR_distribution/biophys_components/mechanisms/x86_64/cav31.mod\n");
  hoc_register_limits(_mechtype, _hoc_parm_limits);
  hoc_register_units(_mechtype, _hoc_parm_units);
  }
@@ -500,7 +500,7 @@ _first = 0;
 }
 
 #if NMODL_TEXT
-static const char* nmodl_filename = "/home/mizzou/Internship/FI_Plot/Pyramidal/biophys_components/mechanisms/modfiles/cav31.mod";
+static const char* nmodl_filename = "/home/mizzou/Internship/NewCell/MakeSynapses/FR_distribution/biophys_components/mechanisms/modfiles/cav31.mod";
 static const char* nmodl_file_text = 
   "TITLE CaT channel alpha-1G from McRory et al, 2001\n"
   ": Reversal potential described by Nernst equation\n"

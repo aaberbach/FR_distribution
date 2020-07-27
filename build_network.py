@@ -1,8 +1,7 @@
 from bmtk.builder import NetworkBuilder
 import numpy as np
 import sys
-import synapses
-
+import synapses                                                                                                                    
 synapses.load()
 syn = synapses.syn_params_dicts()
 
@@ -23,7 +22,7 @@ def lognormal(m, s):
         std = np.sqrt(np.log((s/m)**2 + 1))
         return max(np.random.lognormal(mean, std, 1), 0)
 
-num_inh = [int(lognormal(43, 13)) for i in range(N)]
+num_inh = [int(lognormal(56, 16)) for i in range(N)]
 print(num_inh)
 inh_bounds = []
 sum = 0
@@ -31,7 +30,7 @@ for num in num_inh:
         sum += num
         inh_bounds.append(sum)
 
-num_exc = [int(lognormal(25, 10)) for i in range(N)]
+num_exc = [int(lognormal(1000, 200)) for i in range(N)]
 print(num_exc)
 exc_bounds = []
 sum = 0
@@ -39,19 +38,19 @@ for num in num_exc:
         sum += num
         exc_bounds.append(sum)
 
-exc_fr = 2
+exc_fr = 1.15
 inh_fr = 10
 
 ##################################################################################
 ###################################Pyr Type C#####################################
 
-net.add_nodes(N=N, pop_name='PyrC',
-              potental='exc',
-              model_type='biophysical',
-              model_template='ctdb:Biophys1.hoc',
-              model_processing='aibs_perisomatic',
-              dynamics_params='472363762_fit.json',
-              morphology='Scnn1a_473845048_m.swc')
+net.add_nodes(N=N, pop_name='Pyrc',
+    potental='exc',
+    model_type='biophysical',
+    model_template='ctdb:Biophys1.hoc',
+    model_processing='aibs_allactive',
+    dynamics_params='491766131_fit.json',
+    morphology='Rbp4-Cre_KL100_Ai14-203503.04.01.01_527109145_m.swc')
 
 
 ##################################################################################
@@ -93,18 +92,28 @@ def correct_cell(source, target, bounds):
                 return None
 
 #Create connections between Inh --> Pyr cells
+# net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
+#        connection_rule=correct_cell,
+#        connection_params={'bounds': inh_bounds},
+#        syn_weight=1e-3,
+#        #weight_function='lognormal',
+#        weight_sigma=1e-3,
+#        weight_max=20e-3,
+#        dynamics_params='GABA_InhToExc.json',
+#        model_template='Exp2Syn',
+#        distance_range=[0.0, 300.0],
+#        target_sections=['somatic'],
+#        delay=2.0)
+# Create connections between Exc --> Pyr cells
 net.add_edges(source=inh_stim.nodes(), target=net.nodes(),
-       connection_rule=correct_cell,
-       connection_params={'bounds': inh_bounds},
-       syn_weight=0.1,
-       weight_function='lognormal',
-       weight_sigma=0.05,
-       weight_max=1,
-       dynamics_params='GABA_InhToExc.json',
-       model_template='Exp2Syn',
-       distance_range=[0.0, 300.0],
-       target_sections=['somatic'],
-       delay=2.0)
+                connection_rule=correct_cell,
+                connection_params={'bounds': inh_bounds},
+                syn_weight=1,
+                delay=0.1,
+                dynamics_params='INT2PN.json',
+                model_template=syn['INT2PN.json']['level_of_detail'],
+                distance_range=[0.0, 300.0],
+                target_sections=['somatic'])
 
 # Create connections between Exc --> Pyr cells
 net.add_edges(source=exc_stim.nodes(), target=net.nodes(),
@@ -112,7 +121,7 @@ net.add_edges(source=exc_stim.nodes(), target=net.nodes(),
                 connection_params={'bounds': exc_bounds},
                 syn_weight=1,
                 target_sections=['dend'],
-                delay=2.0,
+                delay=0.1,
                 distance_range=[0.0, 300.0],
                 dynamics_params='PN2PN.json',
                 model_template=syn['PN2PN.json']['level_of_detail'])
@@ -135,14 +144,14 @@ from bmtk.utils.reports.spike_trains.spikes_file_writers import write_csv
 
 exc_psg = PoissonSpikeGenerator(population='exc_stim')
 exc_psg.add(node_ids=range(np.sum(num_exc)),  
-        firing_rate=int(exc_fr) / 1000,    
-        times=(200.0, 1200.0))    
+        firing_rate=exc_fr / 1000,    
+        times=(200.0, 5200.0))    
 exc_psg.to_sonata('exc_stim_spikes.h5')
 
 inh_psg = PoissonSpikeGenerator(population='inh_stim')
 inh_psg.add(node_ids=range(np.sum(num_inh)), 
-        firing_rate=int(inh_fr) / 1000,  
-        times=(200.0, 1200.0))   
+        firing_rate=inh_fr / 1000,  
+        times=(200.0, 5200.0))   
 inh_psg.to_sonata('inh_stim_spikes.h5')
 
 
@@ -150,7 +159,7 @@ from bmtk.utils.sim_setup import build_env_bionet
 
 build_env_bionet(base_dir='./',
                 network_dir='./network',
-                tstop=1200.0, dt = 0.1,
+                tstop=5200.0, dt = 0.1,
                 report_vars=['v'],
                 spikes_inputs=[('exc_stim', 'exc_stim_spikes.h5'), ('inh_stim', 'inh_stim_spikes.h5')],
                 components_dir='biophys_components',
