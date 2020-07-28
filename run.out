@@ -1,4 +1,4 @@
-Running model at Sun Jul 19 08:47:04 PDT 2020
+Running model at Tue Jul 28 09:38:33 PDT 2020
 perl: warning: Setting locale failed.
 perl: warning: Please check that your locale settings:
 	LANGUAGE = (unset),
@@ -13,7 +13,7 @@ perl: warning: Please check that your locale settings:
 	LANG = "C.UTF-8"
     are supported and installed on your system.
 perl: warning: Falling back to the standard locale ("C").
-numprocs=20
+numprocs=100
 NEURON -- VERSION 8.0.dev-118-g5a7e42cd master (5a7e42cd) 2020-06-15
 Duke, Yale, and the BlueBrain Project -- Copyright 1984-2019
 See http://neuron.yale.edu/neuron/credits
@@ -28,16 +28,16 @@ create child processes) is strongly discouraged.
 
 The process that invoked fork was:
 
-  Local host:          [[44987,1],11] (PID 26183)
+  Local host:          [[6108,1],4] (PID 27221)
 
 If you are *absolutely sure* that your application will successfully
 and correctly survive a call to fork(), you may disable this warning
 by setting the mpi_warn_on_fork MCA parameter to 0.
 --------------------------------------------------------------------------
-2020-07-19 08:47:07,432 [INFO] Created log file
-2020-07-19 08:47:07,441 [INFO] Running NEURON with mpi (20 cores).
+2020-07-28 09:38:37,325 [INFO] Created log file
+2020-07-28 09:38:37,327 [INFO] Running NEURON with mpi (100 cores).
 Additional mechanisms from files
- modfiles/CaDynamics.mod modfiles/Ca_HVA.mod modfiles/Ca_LVA.mod modfiles/Gfluct_new_exc.mod modfiles/Gfluct_new_inh.mod modfiles/Ih.mod modfiles/Im.mod modfiles/Im_v2.mod modfiles/K_P.mod modfiles/K_T.mod modfiles/Kd.mod modfiles/Kv2like.mod modfiles/Kv3_1.mod modfiles/MyExp2Sid.mod modfiles/NaTa.mod modfiles/NaTs.mod modfiles/NaV.mod modfiles/Nap.mod modfiles/SK.mod modfiles/ca.mod modfiles/cad.mod modfiles/cadyn.mod modfiles/capool.mod modfiles/cav31.mod modfiles/gabaa.mod modfiles/h.mod modfiles/im.mod modfiles/kaprox.mod modfiles/kca.mod modfiles/kdrca1.mod modfiles/kdrinter_WB.mod modfiles/km.mod modfiles/kv.mod modfiles/leak.mod modfiles/leakinter.mod modfiles/na.mod modfiles/na12.mod modfiles/na16.mod modfiles/na3.mod modfiles/nainter_WB.mod modfiles/nap.mod modfiles/pyr2pyr.mod modfiles/sahp.mod modfiles/vecevent.mod
+ modfiles/CaDynamics.mod modfiles/Ca_HVA.mod modfiles/Ca_LVA.mod modfiles/Gfluct_new_exc.mod modfiles/Gfluct_new_inh.mod modfiles/Ih.mod modfiles/Im.mod modfiles/Im_v2.mod modfiles/K_P.mod modfiles/K_T.mod modfiles/Kd.mod modfiles/Kv2like.mod modfiles/Kv3_1.mod modfiles/MyExp2Sid.mod modfiles/NaTa.mod modfiles/NaTs.mod modfiles/NaV.mod modfiles/Nap.mod modfiles/SK.mod modfiles/ca.mod modfiles/cad.mod modfiles/cadyn.mod modfiles/capool.mod modfiles/cav31.mod modfiles/gabaa.mod modfiles/h.mod modfiles/im.mod modfiles/int2pyr.mod modfiles/kaprox.mod modfiles/kca.mod modfiles/kdrca1.mod modfiles/kdrinter_WB.mod modfiles/km.mod modfiles/kv.mod modfiles/leak.mod modfiles/leakinter.mod modfiles/na.mod modfiles/na12.mod modfiles/na16.mod modfiles/na3.mod modfiles/nainter_WB.mod modfiles/nap.mod modfiles/pyr2pyr.mod modfiles/sahp.mod modfiles/vecevent.mod
 appended sections
 appended sections
 appended sections
@@ -78,43 +78,187 @@ appended sections
 appended sections
 appended sections
 appended sections
-2020-07-19 08:47:08,545 [INFO] Building cells.
-[comet-02-03.sdsc.edu:26165] 19 more processes have sent help message help-opal-runtime.txt / opal_init:warn-fork
-[comet-02-03.sdsc.edu:26165] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
-2020-07-19 08:47:11,787 [INFO] Building recurrent connections
-2020-07-19 08:47:11,787 [INFO] Building virtual cell stimulations for exc_stim_spikes
-2020-07-19 08:47:21,423 [INFO] Building virtual cell stimulations for inh_stim_spikes
-2020-07-19 08:49:02,317 [INFO] Running simulation for 1200.000 ms with the time step 0.100 ms
-2020-07-19 08:49:02,318 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
-2020-07-19 08:49:02,318 [INFO] Block save every 5000 steps
-2020-07-19 08:49:09,693 [INFO]     step:5000 t_sim:500.00 ms
-2020-07-19 08:49:17,084 [INFO]     step:10000 t_sim:1000.00 ms
-2020-07-19 08:49:20,029 [INFO]     step:12000 t_sim:1200.00 ms
-2020-07-19 08:49:22,923 [INFO] Simulation completed in 25.4 seconds 
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-No spikes.
-/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
-  from ._conv import register_converters as _register_converters
-/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
-  from ._conv import register_converters as _register_converters
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+appended sections
+[comet-02-72.sdsc.edu:27197] 99 more processes have sent help message help-opal-runtime.txt / opal_init:warn-fork
+[comet-02-72.sdsc.edu:27197] Set MCA parameter "orte_base_help_aggregate" to 0 to see all help / error messages
+2020-07-28 09:38:44,707 [INFO] Building cells.
+2020-07-28 09:38:46,319 [INFO] Building recurrent connections
+2020-07-28 09:38:46,391 [INFO] Building virtual cell stimulations for exc_stim_spikes
+2020-07-28 09:45:12,857 [INFO] Building virtual cell stimulations for inh_stim_spikes
+2020-07-28 09:53:12,213 [INFO] Running simulation for 5200.000 ms with the time step 0.100 ms
+2020-07-28 09:53:12,213 [INFO] Starting timestep: 0 at t_sim: 0.000 ms
+2020-07-28 09:53:12,213 [INFO] Block save every 5000 steps
+2020-07-28 09:53:35,083 [INFO]     step:5000 t_sim:500.00 ms
+2020-07-28 09:53:58,030 [INFO]     step:10000 t_sim:1000.00 ms
+2020-07-28 09:54:20,936 [INFO]     step:15000 t_sim:1500.00 ms
+2020-07-28 09:54:43,840 [INFO]     step:20000 t_sim:2000.00 ms
+2020-07-28 09:55:06,740 [INFO]     step:25000 t_sim:2500.00 ms
+2020-07-28 09:55:29,648 [INFO]     step:30000 t_sim:3000.00 ms
+2020-07-28 09:55:52,551 [INFO]     step:35000 t_sim:3500.00 ms
+2020-07-28 09:56:15,414 [INFO]     step:40000 t_sim:4000.00 ms
+2020-07-28 09:56:38,264 [INFO]     step:45000 t_sim:4500.00 ms
+2020-07-28 09:57:01,125 [INFO]     step:50000 t_sim:5000.00 ms
+2020-07-28 09:57:10,267 [INFO]     step:52000 t_sim:5200.00 ms
+2020-07-28 09:57:27,695 [INFO] Simulation completed in 4.0 minutes, 52.34 seconds 
 /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
   from ._conv import register_converters as _register_converters
 /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
@@ -147,9 +291,253 @@ No spikes.
   from ._conv import register_converters as _register_converters
 >>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
   from ._conv import register_converters as _register_converters
->>> >>> >>> >>> >>> >>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
   from ._conv import register_converters as _register_converters
->>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> 
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+/home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> >>> >>> >>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
+  from ._conv import register_converters as _register_converters
+>>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> >>> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -171,4 +559,4 @@ No spikes.
 /home/adin726/anaconda3/lib/python3.6/site-packages/h5py/__init__.py:36: FutureWarning: Conversion of the second argument of issubdtype from `float` to `np.floating` is deprecated. In future, it will be treated as `np.float64 == np.dtype(float).type`.
   from ._conv import register_converters as _register_converters
 >>> 
-Done running model at Sun Jul 19 08:49:23 PDT 2020
+Done running model at Tue Jul 28 09:57:29 PDT 2020
