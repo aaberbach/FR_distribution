@@ -22,7 +22,7 @@ def lognormal(m, s):
         std = np.sqrt(np.log((s/m)**2 + 1))
         return max(np.random.lognormal(mean, std, 1), 0)
 
-num_inh = [int(lognormal(56, 8)) for i in range(N)]
+num_inh = [int(lognormal(56, 7.5)) for i in range(N)]
 print(num_inh)
 inh_bounds = []
 sum = 0
@@ -30,7 +30,7 @@ for num in num_inh:
         sum += num
         inh_bounds.append(sum)
 
-num_exc = [int(lognormal(1000, 85)) for i in range(N)]
+num_exc = [int(lognormal(1000, 80)) for i in range(N)]
 print(num_exc)
 exc_bounds = []
 sum = 0
@@ -38,7 +38,7 @@ for num in num_exc:
         sum += num
         exc_bounds.append(sum)
 
-exc_fr = 1.08
+exc_fr = 1.09
 inh_fr = 10
 
 ##################################################################################
