@@ -153,6 +153,7 @@ inh_psg.add(node_ids=range(np.sum(num_inh)),
         firing_rate=inh_fr / 1000,  
         times=(200.0, 5200.0))   
 inh_psg.to_sonata('inh_stim_spikes.h5')
+adin = ""
 
 
 from bmtk.utils.sim_setup import build_env_bionet
