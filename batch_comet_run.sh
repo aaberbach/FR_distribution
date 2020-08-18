@@ -6,7 +6,7 @@
 #SBATCH -A TG-DBS180005
 #SBATCH --job-name=run
 #SBATCH --output=run.out
-#SBATCH --time 0-00:45
+#SBATCH --time 0-01:00
 
 module purge
 #module load python
@@ -23,6 +23,6 @@ rm -rf output
 echo "Running model at $(date)"
 
 #mpirun nrniv -mpi -quiet -python3 run_network.py simulation_config.json
-ibrun nrniv -mpi -python run_save_network.py test_num_3
+ibrun nrniv -mpi -python run_save_network.py uniform_dist_test
 
 echo "Done running model at $(date)"

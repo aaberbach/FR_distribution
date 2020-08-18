@@ -17,7 +17,7 @@ old_library=''
 inherited_linker_flags=' -pthread'
 
 # Libraries that this one depends upon.
-dependency_libs=' -L/home/adin726/neuron/nrn/x86_64/lib /home/adin726/neuron/nrn/x86_64/lib/libnrnoc.la /home/adin726/neuron/nrn/x86_64/lib/liboc.la /home/adin726/neuron/nrn/x86_64/lib/libmemacs.la /home/adin726/neuron/nrn/x86_64/lib/libnrnmpi.la /home/adin726/neuron/nrn/x86_64/lib/libscopmath.la /home/adin726/neuron/nrn/x86_64/lib/libsparse13.la -lreadline -lncurses /home/adin726/neuron/nrn/x86_64/lib/libnrniv.la /home/adin726/neuron/nrn/x86_64/lib/libivoc.la /home/adin726/neuron/nrn/x86_64/lib/libneuron_gnu.la /home/adin726/neuron/nrn/x86_64/lib/libmeschach.la /home/adin726/neuron/nrn/x86_64/lib/libsundials.la /home/adin726/neuron/nrn/x86_64/lib/libivos.la /opt/openmpi/intel/ib/lib/libmpi.la -L/usr/lib64 -llustreapi /opt/openmpi/intel/ib/lib/libopen-rte.la /opt/openmpi/intel/ib/lib/libopen-pal.la -lrdmacm -libverbs -lnuma -ludev /usr/lib64/libpmi2.la /usr/lib64/libpmi.la /usr/lib64/libslurm.la -lpthread -lrt -lutil -lz /opt/gnu/gcc/lib/../lib64/libstdc++.la -lm -ldl'
+dependency_libs=' -L/home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libnrnoc.la /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/liboc.la -lX11 /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libmemacs.la /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libnrnmpi.la /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libscopmath.la /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libsparse13.la -lreadline -lncurses /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libnrniv.la -L/home/mizzou/tools/utils/nrn/mpi_install/mpich-3.2.1/src/mpl /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libivoc.la /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libneuron_gnu.la /home/mizzou/tools//utils/nrn/mpi_install/install/lib/libmpicxx.la /home/mizzou/tools//utils/nrn/mpi_install/install/lib/libmpi.la -lrt -lpthread /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libmeschach.la /home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib/libsundials.la -lm -ldl'
 
 # Names of additional weak libraries provided by this library
 weak_library_names=''
@@ -38,4 +38,4 @@ dlopen=''
 dlpreopen=''
 
 # Directory that this library needs to be installed in:
-libdir='/home/adin726/neuron/nrn/x86_64/lib'
+libdir='/home/mizzou/tools/utils/nrn/neuron_install/nrn/x86_64/lib'

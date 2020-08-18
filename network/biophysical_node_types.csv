@@ -1,2 +1,2 @@
-node_type_id model_template dynamics_params morphology model_type potental pop_name model_processing
-100 ctdb:Biophys1.hoc 491766131_fit.json Rbp4-Cre_KL100_Ai14-203503.04.01.01_527109145_m.swc biophysical exc Pyrc aibs_allactive
+node_type_id potental model_type model_template pop_name model_processing morphology dynamics_params
+100 exc biophysical ctdb:Biophys1.hoc Pyrc aibs_allactive Rbp4-Cre_KL100_Ai14-203503.04.01.01_527109145_m.swc 491766131_fit.json

@@ -55,27 +55,27 @@ conf.build_env()
 graph = bionet.BioNetwork.from_config(conf)
 sim = bionet.BioSimulator.from_config(conf, network=graph)
 
-cells = graph.get_local_cells()
+# cells = graph.get_local_cells()
 
-exc_strengths = {}
-inh_strengths = {}
+# exc_strengths = {}
+# inh_strengths = {}
 
-for gid, cell in cells.items():
-    exc_strens = []
-    inh_strens = []
-    for con in cell._connections:
-        if con._edge_prop.source_population == 'exc_stim':
-            #exc_strens.append(con.syn_weight)
-            exc_strens.append(con._syn.initW)
-        elif con._edge_prop.source_population == 'inh_stim':
-            #inh_strens.append(con.syn_weight)
-            inh_strens.append(con._syn.initW)
-        else:
-            raise Exception("Source pop is: " + str(con._edge_prop.source_population))
+# for gid, cell in cells.items():
+#     exc_strens = []
+#     inh_strens = []
+#     for con in cell._connections:
+#         if con._edge_prop.source_population == 'exc_stim':
+#             #exc_strens.append(con.syn_weight)
+#             exc_strens.append(con._syn.initW)
+#         elif con._edge_prop.source_population == 'inh_stim':
+#             #inh_strens.append(con.syn_weight)
+#             inh_strens.append(con._syn.initW)
+#         else:
+#             raise Exception("Source pop is: " + str(con._edge_prop.source_population))
 
     
-    exc_strengths[gid] = exc_strens
-    inh_strengths[gid] = inh_strens
+#     exc_strengths[gid] = exc_strens
+#     inh_strengths[gid] = inh_strens
 
 sim.run()
 pc.barrier()
@@ -83,7 +83,7 @@ pc.barrier()
 raster_file = './output/spikes.h5'
 
 frs = {}
-local_gids = list(exc_strengths.keys())
+local_gids = list(graph.local_gids)
 
 for key in local_gids:
     frs[key] = 0
@@ -105,12 +105,12 @@ try:
 except:
     print("No spikes.")
 
-df = pd.DataFrame()
-dicts = [{"gid": gid, "FR": frs[gid] / 5, "num_exc": len(exc_strengths[gid]), "num_inh": len(inh_strengths[gid]),
-            "avg_exc": np.mean(exc_strengths[gid]), "avg_inh": np.mean(inh_strengths[gid]), 
-            "max_exc": np.max(exc_strengths[gid]), "max_inh": np.max(inh_strengths[gid]),
-            "std_exc": np.std(exc_strengths[gid]), "std_inh": np.std(inh_strengths[gid]),
-            "skew_exc": skew(exc_strengths[gid]), "skew_inh": skew(inh_strengths[gid])} for gid in local_gids]
+dicts = [{"gid": gid, "FR": frs[gid] / 5} for gid in local_gids]
+# dicts = [{"gid": gid, "FR": frs[gid] / 5, "num_exc": len(exc_strengths[gid]), "num_inh": len(inh_strengths[gid]),
+#             "avg_exc": np.mean(exc_strengths[gid]), "avg_inh": np.mean(inh_strengths[gid]), 
+#             "max_exc": np.max(exc_strengths[gid]), "max_inh": np.max(inh_strengths[gid]),
+#             "std_exc": np.std(exc_strengths[gid]), "std_inh": np.std(inh_strengths[gid]),
+#             "skew_exc": skew(exc_strengths[gid]), "skew_inh": skew(inh_strengths[gid])} for gid in local_gids]
 df = pd.DataFrame(dicts)
 #df.set_index("gid")
 df.to_csv(fname+str(MPI_rank)+'.csv', index=False)
@@ -122,5 +122,8 @@ pc.barrier()
 if MPI_rank == 0:
     base_df = pd.read_csv(fname+"0.csv", index_col="gid")
     res_df = pd.concat([base_df] + [pd.read_csv(fname+str(rank)+".csv", index_col="gid") for rank in range(1, MPI_size)])
+    frs_df = pd.read_csv('frs_temp.csv', index_col="gid")
+    res_df = res_df.join(frs_df)
     [os.remove(fname+str(rank)+".csv") for rank in range(MPI_size)]
+    os.remove("frs_temp.csv")
     res_df.to_csv(fname+".csv")

@@ -5,7 +5,7 @@
 #SBATCH -A TG-DBS180005
 #SBATCH --job-name=build
 #SBATCH --output=build.out
-#SBATCH --time 0-00:40
+#SBATCH --time 0-01:00
 
 
 module purge
@@ -22,6 +22,6 @@ rm -rf network/*
 
 echo "Building model at $(date)"
 
-python build_network.py 500
+python build_network.py 1000
 
 echo "Done building model at $(date)"

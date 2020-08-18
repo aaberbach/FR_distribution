@@ -178,7 +178,8 @@ def Int2Pyr(syn_params, sec_x, sec_id):
     
     if syn_params.get('initW'):
         #lsyn.initW = float(syn_params['initW']) * random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
-        lsyn.initW = float(lognormal(3.171729, 0.5173616067))
+        #lsyn.initW = float(lognormal(3.171729, 0.5173616067))
+        lsyn.initW = 3.171729
     if syn_params.get('Wmax'):
         lsyn.Wmax = float(syn_params['Wmax']) * lsyn.initW # par.x(1) * lsyn.initW
     if syn_params.get('Wmin'):
@@ -259,8 +260,8 @@ def Pyr2Pyr(syn_params, sec_x, sec_id):
     
     if syn_params.get('initW'):
         #lsyn.initW = float(syn_params['initW']) * random.uniform(0.5,1.0) # par.x(0) * rC.uniform(0.5,1.0)//rand.normal(0.5,1.5) //`rand.repick() 
-        lsyn.initW = float(lognormal(0.18181829517744805, 0.13993260156705545))
-        #lsyn.initW = 0.18154
+        #lsyn.initW = float(lognormal(0.18181829517744805, 0.13993260156705545))
+        lsyn.initW = 0.18181829517744805
         #print(lsyn.initW)
         
     if syn_params.get('Wmax'):

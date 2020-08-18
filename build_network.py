@@ -1,9 +1,12 @@
 from bmtk.builder import NetworkBuilder
 import numpy as np
 import sys
-import synapses                                                                                                                    
+import synapses             
+import pandas as pd                                                                                                       
 synapses.load()
 syn = synapses.syn_params_dicts()
+
+np.random.seed(3546)
 
 if __name__ == '__main__':
     if __file__ != sys.argv[-1]:
@@ -22,24 +25,39 @@ def lognormal(m, s):
         std = np.sqrt(np.log((s/m)**2 + 1))
         return max(np.random.lognormal(mean, std, 1), 0)
 
-num_inh = [int(lognormal(56, 7.5)) for i in range(N)]
-print(num_inh)
+#num_inh = [int(lognormal(56, 7.5)) for i in range(N)]
+num_inh = [56 for i in range(N)]
+#print(num_inh)
 inh_bounds = []
 sum = 0
 for num in num_inh:
         sum += num
         inh_bounds.append(sum)
 
-num_exc = [int(lognormal(1000, 80)) for i in range(N)]
-print(num_exc)
+#num_exc = [int(lognormal(1000, 80)) for i in range(N)]
+num_exc = [1000 for i in range(N)]
+#print(num_exc)
 exc_bounds = []
 sum = 0
 for num in num_exc:
         sum += num
         exc_bounds.append(sum)
 
-exc_fr = 1.09
-inh_fr = 10
+
+exc_frs = np.random.uniform(0, 2, N)
+inh_frs = np.random.uniform(8, 12, N)
+print("FRS:",exc_frs,inh_frs)
+
+fr_df = pd.DataFrame()
+fr_df['gid'] = [i for i in range(N)]
+fr_df.set_index('gid')
+fr_df['exc_fr'] = exc_frs
+fr_df['inh_fr'] = inh_frs
+
+fr_df.to_csv('frs_temp.csv')
+
+# exc_fr = 1.09
+# inh_fr = 10
 
 ##################################################################################
 ###################################Pyr Type C#####################################
@@ -143,17 +161,24 @@ from bmtk.utils.reports.spike_trains import PoissonSpikeGenerator
 from bmtk.utils.reports.spike_trains.spikes_file_writers import write_csv
 
 exc_psg = PoissonSpikeGenerator(population='exc_stim')
-exc_psg.add(node_ids=range(np.sum(num_exc)),  
-        firing_rate=exc_fr / 1000,    
-        times=(200.0, 5200.0))    
+# exc_psg.add(node_ids=range(np.sum(num_exc)),  
+#         firing_rate=exc_fr / 1000,    
+#         times=(200.0, 5200.0))    
+for i in range(N):
+        exc_psg.add(node_ids=range(exc_bounds[i] - num_exc[i], exc_bounds[i]),
+                firing_rate=exc_frs[i] / 1000,
+                times=(200.0, 5200.0))
 exc_psg.to_sonata('exc_stim_spikes.h5')
 
 inh_psg = PoissonSpikeGenerator(population='inh_stim')
-inh_psg.add(node_ids=range(np.sum(num_inh)), 
-        firing_rate=inh_fr / 1000,  
-        times=(200.0, 5200.0))   
+# inh_psg.add(node_ids=range(np.sum(num_inh)), 
+#         firing_rate=inh_fr / 1000,  
+#         times=(200.0, 5200.0))   
+for i in range(N):
+        inh_psg.add(node_ids=range(inh_bounds[i] - num_inh[i], inh_bounds[i]),
+                firing_rate=inh_frs[i] / 1000,
+                times=(200.0, 5200.0))
 inh_psg.to_sonata('inh_stim_spikes.h5')
-adin = ""
 
 
 from bmtk.utils.sim_setup import build_env_bionet
